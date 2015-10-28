@@ -7,10 +7,11 @@ import javax.persistence.Persistence;
 public class JPAHelper {
 	private static EntityManagerFactory factory;
 	private static EntityManager em;
+	private static final String PERSISTENCE_UNIT_NAME = "hello-world";
 
 	private static void init() {
 		if (factory == null) {
-			factory = Persistence.createEntityManagerFactory("hibernatePersistenceUnit");
+			factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		}
 		if (em == null) {
 			em = factory.createEntityManager();
