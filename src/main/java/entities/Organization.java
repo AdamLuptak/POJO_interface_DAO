@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,7 +22,7 @@ public class Organization {
 	private String name;
 	@Column(nullable = false)
 	private String description;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
+	@OneToMany(targetEntity = User.class, mappedBy = "organization", fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 
 	public Organization() {
