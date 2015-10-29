@@ -9,3 +9,4 @@
 2. Where we put foreign keys in what class
 3  Cascade deleting etc. for what classes ?
 
+Roses are <span style="color:red">red</span>, violets are <span style="color:blue">blue</span>.
