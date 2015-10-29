@@ -3,23 +3,30 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "GroupTable")
 public class Group {
 	@Id
 	@GeneratedValue
 	private long id;
-
+	@Column(nullable = false)
 	private String name;
-
+	@Column(nullable = false)
 	private String Description;
+	@OneToMany
+	private List<Group> groups = new ArrayList<Group>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<User> members = new ArrayList<User>();
 
 	public Group() {
 
@@ -29,12 +36,6 @@ public class Group {
 		this.name = name;
 		Description = description;
 	}
-
-	@OneToMany
-	private List<Group> groups = new ArrayList<Group>();
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<User> members = new ArrayList<User>();
 
 	public long getId() {
 		return id;

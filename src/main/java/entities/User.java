@@ -3,7 +3,6 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,6 +36,10 @@ public class User {
 	private String email;
 	@Column(nullable = false)
 	private int phone;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Organization organization;
+	@ManyToMany(mappedBy = "members")
+	private List<Group> groups = new ArrayList<Group>();
 
 	public User() {
 	}
@@ -54,9 +57,6 @@ public class User {
 		this.phone = phone;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Organization organization;
-
 	public Organization getOrganization() {
 		return organization;
 	}
@@ -64,9 +64,6 @@ public class User {
 	public void setOrganizations(Organization organization) {
 		this.organization = organization;
 	}
-
-	@ManyToMany(mappedBy = "members")
-	private List<Group> groups = new ArrayList<Group>(); 
 
 	public List<Group> getGroups() {
 		return this.groups;

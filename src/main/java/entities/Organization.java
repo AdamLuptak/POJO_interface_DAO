@@ -19,17 +19,8 @@ public class Organization {
 	private String name;
 	@Column(nullable = false)
 	private String description;
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "organization")
-	private List<User> users = new ArrayList<User>();;
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(User user) {
-		this.users.add(user);
-	}
+	private List<User> users = new ArrayList<User>();
 
 	public Organization() {
 
@@ -38,6 +29,14 @@ public class Organization {
 	public Organization(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(User user) {
+		this.users.add(user);
 	}
 
 	public long getId() {

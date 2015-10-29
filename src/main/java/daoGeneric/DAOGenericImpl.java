@@ -2,20 +2,20 @@ package daoGeneric;
 
 import java.util.List;
 
-import entities.User;
-
+/**
+ * len pokus o genericky DAO
+ */
 public class DAOGenericImpl<T> implements DAOGenericInterface<T> {
 
 	public List<T> getAllEntities(T clazz) {
-		// TODO Auto-generated method stub
 
 		JPAHelper.beginTransaction();
 
-		List<T> objects = (JPAHelper.getEntityManager()
+		List<?> objects = (JPAHelper.getEntityManager()
 				.createQuery("SELECT p FROM  " + clazz.getClass().getName() + " p").getResultList());
 
 		JPAHelper.commitTransaction();
-		return objects;
+		return (List<T>) objects;
 	}
 
 	public T getSingleEntitie(T objectIn) {
@@ -24,8 +24,9 @@ public class DAOGenericImpl<T> implements DAOGenericInterface<T> {
 	}
 
 	public void updateEntitie(T objectIn) {
-		// TODO Auto-generated method stub
-
+		JPAHelper.beginTransaction();
+		JPAHelper.getEntityManager().persist(objectIn);
+		JPAHelper.commitTransaction();
 	}
 
 	public void deleteEntitie(T objectIn) {
